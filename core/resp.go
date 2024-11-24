@@ -91,3 +91,17 @@ func Decode(data []byte) (interface{}, error) {
 
    return value, err
 } 
+
+func DecodeArrayString(data []byte) ([]string, error) {
+	value, err := Decode(data);
+	if err != nil {
+		return nil, err
+	}
+	ts := value.([]interface{})
+	tokens := make([]string, len(ts))
+
+	for i:= range tokens {
+       tokens[i] = ts[i].(string)
+	}
+	return tokens, nil
+}
